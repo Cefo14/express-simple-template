@@ -9,8 +9,9 @@ exports.signIn = async (req, res) => {
 		const email = req.body.email
 		const password = req.body.password
 		const user = await User.findOne({email : email}, '+password');
+		const isPassword = bcrypt.compare(user.password, password)
 		
-		if(user && bcrypt.compare(user.password, password))
+		if(user && isPassword)
 		{
 			const token = jwt.encode(user)
 			res.status(200).json({auth: true, token: token})

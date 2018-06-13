@@ -13,15 +13,6 @@ exports.encode = (user) => {
 	return jwt.sign(payload, config.KEY_TOKEN)
 }
 
-exports.decode = async (token) => {
-	try
-	{
-		const data = await jwt.verify(token, config.KEY_TOKEN);
-		return data
-	}
-
-	catch(err)
-	{
-		throw err
-	}
+exports.decode = (token) => {
+	return jwt.verify(token, config.KEY_TOKEN)
 }
